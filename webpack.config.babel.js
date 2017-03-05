@@ -13,8 +13,7 @@ const config = {
   devtool: 'cheap-module-eval-source-map',
   entry: {
     app: [
-      './src/index.js',
-      'webpack/hot/only-dev-server'
+      './src/index.js'
     ]
   },
   output: {
@@ -41,6 +40,8 @@ const config = {
 
 if (process.env.NODE_ENV === 'production') {
   config.plugins.push(new UglifyJsPlugin({sourceMap: false, output: {comments: false}}))
+} else {
+  config.entry.app.push('webpack/hot/only-dev-server')
 }
 
 export default config
