@@ -1,0 +1,32 @@
+{
+  "name": "jetmidi-web",
+  "version": "0.0.1",
+  "description": "Web-based client/server for sharing MIDI events over the internet",
+  "scripts": {
+    "start": "webpack-dev-server --history-api-fallback --hot --inline --no-info --content-base=./webroot",
+    "build": "NODE_ENV=production webpack"
+  },
+  "author": "David Konsumer <konsumer@jetboystudio.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-env": "^1.2.0",
+    "css-loader": "^0.26.2",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^6.0.2",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  },
+  "dependencies": {
+    "qwerty-hancock": "^0.5.1",
+    "rtc-quickconnect": "^5.8.0",
+    "simplewebrtc": "^2.2.3"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  }
+}
