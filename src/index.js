@@ -26,6 +26,32 @@ const offSound = frequency => {
   }
 }
 
+const midiMessageReceived = ev => {
+  var cmd = ev.data[0] >> 4
+  // var channel = ev.data[0] & 0xf
+  var noteNumber = ev.data[1]
+  var velocity = 0
+  if (ev.data.length > 2) {
+    velocity = ev.data[2]
+  }
+
+  // MIDI noteon with velocity=0 is the same as noteoff
+  if (cmd === 8 || ((cmd === 9) && (velocity === 0))) { // noteoff
+    // noteOff(noteNumber)
+  } else if (cmd === 9) { // note on
+    // noteOn(noteNumber, velocity)
+  } else if (cmd === 11) { // controller message
+    // controller(noteNumber, velocity)
+  }
+}
+
+navigator.requestMIDIAccess()
+.then(midi => {
+  for (var input of midi.inputs.values()) {
+    input.onmidimessage = midiMessageReceived
+  }
+})
+
 const webrtc = new SimpleWebRTC({
   localVideoEl: 'localVideo',
   remoteVideosEl: 'remotesVideos',
@@ -40,8 +66,8 @@ const settings = {
   id: 'keyboard',
   width: 800,
   height: 150,
-  octaves: 2,
-  startNote: 'A3',
+  octaves: 4,
+  startNote: 'C2',
   whiteNotesColour: 'white',
   blackNotesColour: 'black',
   whiteKeyColour: '#fff',
